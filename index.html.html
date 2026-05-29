@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporación SYSITI - Soluciones Integrales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --azul-oscuro: #0a192f;
+            --azul-medio: #112240;
+            --verde-manzana: #64ffda;
+            --verde-oscuro: #00d4aa;
+            --plateado: #8892b0;
+            --plateado-claro: #ccd6f6;
+            --blanco: #e6f1ff;
+            --transicion: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--azul-oscuro);
+            color: var(--plateado);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 0.8rem 5%;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transicion);
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.08);
+            filter: drop-shadow(0 4px 15px rgba(100, 255, 218, 0.25));
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            color: var(--blanco);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .logo-slogan {
+            color: var(--verde-manzana);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--plateado-claro);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transicion);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--verde-manzana);
+            transition: var(--transicion);
+        }
+
+        .nav-links a:hover {
+            color: var(--verde-manzana);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .language-switcher {
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid var(--verde-manzana);
+            color: var(--verde-manzana);
+            padding: 0.45rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transicion);
+        }
+
+        .lang-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--azul-medio);
+            border: 1px solid var(--verde-manzana);
+            border-radius: 5px;
+            overflow: hidden;
+            display: none;
+            min-width: 150px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .lang-dropdown.active {
+            display: block;
+        }
+
+        .lang-option {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: var(--transicion);
+            color: var(--plateado-claro);
+            font-size: 0.9rem;
+        }
+
+        .lang-option:hover {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--verde-manzana);
+        }
+
+        .lang-option i {
+            font-size: 1.2rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--verde-manzana);
+            margin: 3px 0;
+            transition: var(--transicion);
+        }
+
+        .hero {
+            margin-top: 75px;
+            padding: 100px 5%;
+            background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-medio) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            color: var(--blanco);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-content .highlight {
+            color: var(--verde-manzana);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--plateado);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--verde-manzana);
+            color: var(--verde-manzana);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: var(--transicion);
+            cursor: pointer;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+        }
+
+        .btn-primary {
+            background: var(--verde-manzana);
+            color: var(--azul-oscuro);
+        }
+
+        .btn-primary:hover {
+            background: var(--verde-oscuro);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            color: var(--blanco);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            color: var(--verde-manzana);
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .what-we-do {
+            background: var(--azul-medio);
+        }
+
+        .process-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-card {
+            background: var(--azul-oscuro);
+            border: 2px solid rgba(100, 255, 218, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            transition: var(--transicion);
+        }
+
+        .process-card:hover {
+            border-color: var(--verde-manzana);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .process-card::after {
+            content: '→';
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--verde-manzana);
+            font-size: 2rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .process-card:last-child::after {
+            display: none;
+        }
+
+        .process-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--verde-manzana);
+            color: var(--azul-oscuro);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .process-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--azul-medio), rgba(100, 255, 218, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            color: var(--verde-manzana);
+            border: 3px solid var(--verde-manzana);
+        }
+
+        .process-card h3 {
+            color: var(--blanco);
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .process-card p {
+            text-align: center;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .process-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .process-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--verde-manzana);
+        }
+
+        .business-solutions {
+            margin-top: 5rem;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background: var(--azul-oscuro);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: var(--transicion);
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: var(--verde-manzana);
+        }
+
+        .solution-header {
+            background: linear-gradient(135deg, var(--azul-medio), var(--azul-oscuro));
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid var(--verde-manzana);
+        }
+
+        .solution-header i {
+            font-size: 3rem;
+            color: var(--verde-manzana);
+            margin-bottom: 1rem;
+        }
+
+        .solution-header h3 {
+            color: var(--blanco);
+            font-size: 1.3rem;
+        }
+
+        .solution-body {
+            padding: 1.5rem;
+        }
+
+        .solution-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .flow-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem;
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--verde-manzana);
+        }
+
+        .flow-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--verde-manzana);
+            color: var(--azul-oscuro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .flow-content h4 {
+            color: var(--blanco);
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .flow-content p {
+            font-size: 0.85rem;
+            color: var(--plateado);
+        }
+
+        .about {
+            background: var(--azul-medio);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-content h3 {
+            color: var(--blanco);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .stat-number {
+            color: var(--verde-manzana);
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--plateado);
+            font-size: 0.9rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--azul-medio);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: var(--transicion);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--verde-manzana), var(--plateado));
+            transform: scaleX(0);
+            transition: var(--transicion);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--verde-manzana);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--verde-manzana);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            color: var(--blanco);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transicion);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, var(--azul-oscuro), transparent);
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: var(--transicion);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .project-overlay h3 {
+            color: var(--verde-manzana);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-overlay p {
+            color: var(--plateado-claro);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--azul-medio);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: var(--transicion);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--verde-manzana));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--azul-oscuro);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            color: var(--verde-manzana);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-card h3 {
+            color: var(--blanco);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .read-more {
+            color: var(--verde-manzana);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact {
+            background: var(--azul-medio);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            color: var(--blanco);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            color: var(--verde-manzana);
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-form {
+            background: var(--azul-oscuro);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--blanco);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--azul-medio);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 5px;
+            color: var(--blanco);
+            font-family: inherit;
+            transition: var(--transicion);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--verde-manzana);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        footer {
+            background: var(--azul-oscuro);
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--plateado);
+            font-size: 1.5rem;
+            transition: var(--transicion);
+        }
+
+        .social-links a:hover {
+            color: var(--verde-manzana);
+            transform: translateY(-3px);
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo .logo-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .process-container { grid-template-columns: repeat(2, 1fr); }
+            .process-card:nth-child(2)::after { display: none; }
+            .solutions-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 75px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 75px);
+                background: var(--azul-oscuro);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: var(--transicion);
+            }
+            .nav-links.active { right: 0; }
+            .menu-toggle { display: flex; }
+            .language-switcher { margin-left: 0; margin-top: 1rem; }
+            .hero-container,
+            .about-grid,
+            .contact-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .process-container { grid-template-columns: 1fr; }
+            .process-card::after { display: none; }
+            .stats { grid-template-columns: 1fr; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Esfera azul con degradado tipo globo -->
+                            <radialGradient id="sphereBg" cx="30%" cy="25%" r="70%">
+                                <stop offset="0%" stop-color="#1e4d8c"/>
+                                <stop offset="40%" stop-color="#0f2d5e"/>
+                                <stop offset="75%" stop-color="#0a1f44"/>
+                                <stop offset="100%" stop-color="#061530"/>
+                            </radialGradient>
+
+                            <!-- Brillo superior de la esfera -->
+                            <radialGradient id="sphereHighlight" cx="30%" cy="15%" r="55%">
+                                <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+                                <stop offset="50%" stop-color="rgba(255,255,255,0.08)"/>
+                                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                            </radialGradient>
+
+                            <!-- Arco blanco/plateado -->
+                            <linearGradient id="silverArc" x1="0%" y1="0%" x2="80%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="50%" stop-color="#d4d4d4"/>
+                                <stop offset="100%" stop-color="#b8b8b8"/>
+                            </linearGradient>
+
+                            <!-- Arco verde -->
+                            <linearGradient id="greenArc" x1="30%" y1="0%" x2="70%" y2="100%">
+                                <stop offset="0%" stop-color="#8cc63f"/>
+                                <stop offset="100%" stop-color="#5da82e"/>
+                            </linearGradient>
+
+                            <!-- Clip circular para el globo -->
+                            <clipPath id="globeClip">
+                                <circle cx="50" cy="50" r="40"/>
+                            </clipPath>
+
+                            <!-- Sombra inferior suave -->
+                            <filter id="softShadow">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                                <feOffset dx="0" dy="2"/>
+                                <feComponentTransfer>
+                                    <feFuncA type="linear" slope="0.3"/>
+                                </feComponentTransfer>
+                                <feMerge>
+                                    <feMergeNode/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Sombra inferior del globo -->
+                        <ellipse cx="50" cy="94" rx="35" ry="4" fill="rgba(0,0,0,0.25)" filter="url(#softShadow)"/>
+
+                        <!-- Esfera principal -->
+                        <circle cx="50" cy="50" r="40" fill="url(#sphereBg)"/>
+
+                        <!-- CONTINENTES CON PATRÓN DE PUNTOS -->
+                        <g clip-path="url(#globeClip)">
+                            <!-- Norteamérica - puntos formando la silueta -->
+                            <g fill="#5a9ec7" opacity="0.7">
+                                <!-- Alaska -->
+                                <circle cx="14" cy="18" r="1.5"/><circle cx="16" cy="16" r="1.5"/><circle cx="18" cy="15" r="1.5"/>
+                                <!-- Canadá -->
+                                <circle cx="12" cy="22" r="1.5"/><circle cx="15" cy="20" r="1.5"/><circle cx="18" cy="19" r="1.5"/><circle cx="21" cy="18" r="1.5"/><circle cx="24" cy="17" r="1.5"/>
+                                <circle cx="13" cy="24" r="1.5"/><circle cx="16" cy="22" r="1.5"/><circle cx="19" cy="21" r="1.5"/><circle cx="22" cy="20" r="1.5"/><circle cx="25" cy="19" r="1.5"/>
+                                <circle cx="14" cy="26" r="1.5"/><circle cx="17" cy="24" r="1.5"/><circle cx="20" cy="23" r="1.5"/><circle cx="23" cy="22" r="1.5"/><circle cx="26" cy="21" r="1.5"/>
+                                <!-- USA -->
+                                <circle cx="15" cy="28" r="1.5"/><circle cx="18" cy="26" r="1.5"/><circle cx="21" cy="25" r="1.5"/><circle cx="24" cy="24" r="1.5"/><circle cx="27" cy="23" r="1.5"/><circle cx="30" cy="22" r="1.5"/>
+                                <circle cx="16" cy="30" r="1.5"/><circle cx="19" cy="28" r="1.5"/><circle cx="22" cy="27" r="1.5"/><circle cx="25" cy="26" r="1.5"/><circle cx="28" cy="25" r="1.5"/><circle cx="31" cy="24" r="1.5"/>
+                                <circle cx="17" cy="32" r="1.5"/><circle cx="20" cy="30" r="1.5"/><circle cx="23" cy="29" r="1.5"/><circle cx="26" cy="28" r="1.5"/><circle cx="29" cy="27" r="1.5"/><circle cx="32" cy="26" r="1.5"/>
+                                <circle cx="18" cy="34" r="1.5"/><circle cx="21" cy="32" r="1.5"/><circle cx="24" cy="31" r="1.5"/><circle cx="27" cy="30" r="1.5"/><circle cx="30" cy="29" r="1.5"/><circle cx="33" cy="28" r="1.5"/>
+                                <circle cx="22" cy="34" r="1.5"/><circle cx="25" cy="33" r="1.5"/><circle cx="28" cy="32" r="1.5"/><circle cx="31" cy="31" r="1.5"/><circle cx="34" cy="30" r="1.5"/>
+                                <circle cx="26" cy="34" r="1.5"/><circle cx="29" cy="34" r="1.5"/><circle cx="32" cy="33" r="1.5"/><circle cx="35" cy="32" r="1.5"/>
+                                <!-- Centroamérica -->
+                                <circle cx="24" cy="37" r="1.5"/><circle cx="26" cy="38" r="1.5"/><circle cx="28" cy="39" r="1.5"/>
+                            </g>
+
+                            <!-- Sudamérica - puntos -->
+                            <g fill="#5a9ec7" opacity="0.7">
+                                <circle cx="30" cy="40" r="1.5"/><circle cx="33" cy="39" r="1.5"/><circle cx="36" cy="38" r="1.5"/>
+                                <circle cx="31" cy="42" r="1.5"/><circle cx="34" cy="41" r="1.5"/><circle cx="37" cy="40" r="1.5"/><circle cx="40" cy="39" r="1.5"/>
+                                <circle cx="32" cy="44" r="1.5"/><circle cx="35" cy="43" r="1.5"/><circle cx="38" cy="42" r="1.5"/><circle cx="41" cy="41" r="1.5"/>
+                                <circle cx="33" cy="46" r="1.5"/><circle cx="36" cy="45" r="1.5"/><circle cx="39" cy="44" r="1.5"/><circle cx="42" cy="43" r="1.5"/>
+                                <circle cx="34" cy="48" r="1.5"/><circle cx="37" cy="47" r="1.5"/><circle cx="40" cy="46" r="1.5"/><circle cx="43" cy="45" r="1.5"/>
+                                <circle cx="35" cy="50" r="1.5"/><circle cx="38" cy="49" r="1.5"/><circle cx="41" cy="48" r="1.5"/><circle cx="44" cy="47" r="1.5"/>
+                                <circle cx="36" cy="52" r="1.5"/><circle cx="39" cy="51" r="1.5"/><circle cx="42" cy="50" r="1.5"/><circle cx="45" cy="49" r="1.5"/>
+                                <circle cx="37" cy="54" r="1.5"/><circle cx="40" cy="53" r="1.5"/><circle cx="43" cy="52" r="1.5"/><circle cx="46" cy="51" r="1.5"/>
+                                <circle cx="38" cy="56" r="1.5"/><circle cx="41" cy="55" r="1.5"/><circle cx="44" cy="54" r="1.5"/>
+                                <circle cx="39" cy="58" r="1.5"/><circle cx="42" cy="57" r="1.5"/><circle cx="45" cy="56" r="1.5"/>
+                                <circle cx="40" cy="60" r="1.5"/><circle cx="43" cy="59" r="1.5"/>
+                                <circle cx="41" cy="62" r="1.5"/><circle cx="44" cy="61" r="1.5"/>
+                            </g>
+
+                            <!-- Europa - puntos -->
+                            <g fill="#4a8db7" opacity="0.5">
+                                <circle cx="62" cy="16" r="1.5"/><circle cx="65" cy="15" r="1.5"/><circle cx="68" cy="14" r="1.5"/>
+                                <circle cx="63" cy="18" r="1.5"/><circle cx="66" cy="17" r="1.5"/><circle cx="69" cy="16" r="1.5"/>
+                                <circle cx="64" cy="20" r="1.5"/><circle cx="67" cy="19" r="1.5"/><circle cx="70" cy="18" r="1.5"/>
+                                <circle cx="65" cy="22" r="1.5"/><circle cx="68" cy="21" r="1.5"/><circle cx="71" cy="20" r="1.5"/>
+                                <circle cx="66" cy="24" r="1.5"/><circle cx="69" cy="23" r="1.5"/>
+                            </g>
+
+                            <!-- África - puntos -->
+                            <g fill="#4a8db7" opacity="0.5">
+                                <circle cx="68" cy="28" r="1.5"/><circle cx="71" cy="27" r="1.5"/>
+                                <circle cx="69" cy="30" r="1.5"/><circle cx="72" cy="29" r="1.5"/>
+                                <circle cx="70" cy="32" r="1.5"/><circle cx="73" cy="31" r="1.5"/>
+                                <circle cx="71" cy="34" r="1.5"/><circle cx="74" cy="33" r="1.5"/>
+                                <circle cx="72" cy="36" r="1.5"/><circle cx="75" cy="35" r="1.5"/>
+                                <circle cx="73" cy="38" r="1.5"/><circle cx="76" cy="37" r="1.5"/>
+                                <circle cx="74" cy="40" r="1.5"/><circle cx="77" cy="39" r="1.5"/>
+                                <circle cx="75" cy="42" r="1.5"/><circle cx="78" cy="41" r="1.5"/>
+                                <circle cx="76" cy="44" r="1.5"/><circle cx="79" cy="43" r="1.5"/>
+                                <circle cx="77" cy="46" r="1.5"/><circle cx="80" cy="45" r="1.5"/>
+                                <circle cx="78" cy="48" r="1.5"/><circle cx="81" cy="47" r="1.5"/>
+                                <circle cx="79" cy="50" r="1.5"/><circle cx="82" cy="49" r="1.5"/>
+                                <circle cx="80" cy="52" r="1.5"/>
+                            </g>
+
+                            <!-- Asia parcial - puntos -->
+                            <g fill="#4a8db7" opacity="0.4">
+                                <circle cx="82" cy="20" r="1.5"/><circle cx="85" cy="19" r="1.5"/><circle cx="88" cy="18" r="1.5"/>
+                                <circle cx="83" cy="22" r="1.5"/><circle cx="86" cy="21" r="1.5"/><circle cx="89" cy="20" r="1.5"/>
+                                <circle cx="84" cy="24" r="1.5"/><circle cx="87" cy="23" r="1.5"/><circle cx="90" cy="22" r="1.5"/>
+                            </g>
+
+                            <!-- Líneas de cuadrícula del mapa -->
+                            <g opacity="0.12" fill="none" stroke="#ffffff" stroke-width="0.5">
+                                <!-- Horizontales -->
+                                <ellipse cx="50" cy="50" rx="40" ry="8"/>
+                                <ellipse cx="50" cy="50" rx="40" ry="16"/>
+                                <ellipse cx="50" cy="50" rx="40" ry="24"/>
+                                <ellipse cx="50" cy="50" rx="40" ry="32"/>
+                                <!-- Verticales (arcos) -->
+                                <path d="M50 10 Q45 30 50 50 Q45 70 50 90"/>
+                                <path d="M50 10 Q55 30 50 50 Q55 70 50 90"/>
+                                <path d="M50 10 Q60 30 50 50 Q60 70 50 90"/>
+                                <path d="M50 10 Q40 30 50 50 Q40 70 50 90"/>
+                                <path d="M50 10 Q35 30 50 50 Q35 70 50 90"/>
+                            </g>
+                        </g>
+
+                        <!-- Brillo superior de la esfera -->
+                        <circle cx="50" cy="50" r="40" fill="url(#sphereHighlight)"/>
+
+                        <!-- Contorno exterior del globo -->
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#8892b0" stroke-width="1" opacity="0.3"/>
+
+                        <!-- ARCO BLANCO/PLATEADO SUPERIOR IZQUIERDO -->
+                        <path d="M8 38 Q20 18 38 12 Q50 8 60 10 Q55 14 42 18 Q28 24 14 40Z" 
+                              fill="url(#silverArc)" opacity="0.92"/>
+
+                        <!-- ARCO VERDE SUPERIOR DERECHO -->
+                        <path d="M48 10 Q62 6 78 12 Q90 18 96 30 Q92 22 80 17 Q68 12 52 14Z" 
+                              fill="url(#greenArc)" opacity="0.92"/>
+
+                        <!-- Reflejo inferior de la esfera -->
+                        <ellipse cx="50" cy="95" rx="28" ry="3" fill="rgba(100,255,218,0.05)"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">SYSITI</span>
+                    <span class="logo-slogan" data-i18n="slogan">Soluciones Integrales</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" data-i18n="nav_home">Home</a></li>
+                <li><a href="#about" data-i18n="nav_about">Quiénes Somos</a></li>
+                <li><a href="#what-we-do" data-i18n="nav_whatwedo">Qué Hacemos</a></li>
+                <li><a href="#services" data-i18n="nav_services">Servicios</a></li>
+                <li><a href="#projects" data-i18n="nav_projects">Proyectos</a></li>
+                <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
+                <li><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">Contacto</a></li>
+                <li class="language-switcher">
+                    <button class="lang-btn" id="langBtn">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLang">ES</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <div class="lang-option" data-lang="es">
+                            <i class="fas fa-flag"></i>
+                            <span>Español</span>
+                        </div>
+                        <div class="lang-option" data-lang="en">
+                            <i class="fas fa-flag-usa"></i>
+                            <span>English</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content fade-in">
+                <h1 data-i18n="hero_title">Transformamos tu Negocio con <span class="highlight">Inteligencia Artificial</span> y Automatización</h1>
+                <p data-i18n="hero_subtitle">Soluciones tecnológicas integrales que impulsan la innovación, optimizan procesos y generan valor real para tu empresa. Especialistas en IA, agentes inteligentes y transformación digital.</p>
+                <a href="#contact" class="btn btn-primary" data-i18n="btn_start">Iniciar Proyecto</a>
+                <a href="#services" class="btn" data-i18n="btn_services">Conocer Servicios</a>
+            </div>
+            <div class="hero-image fade-in">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Tecnología Corporativa">
+            </div>
+        </div>
+    </section>
+
+    <!-- Qué Hacemos -->
+    <section class="what-we-do" id="what-we-do">
+        <div class="container">
+            <h2 class="section-title fade-in" data-i18n="whatwedo_title">Qué Hacemos</h2>
+            <p class="section-subtitle fade-in" data-i18n="whatwedo_subtitle">Proceso de Soluciones Integrales</p>
+            <div class="process-container">
+                <div class="process-card fade-in">
+                    <div class="process-number">1</div>
+                    <div class="process-icon"><i class="fas fa-inbox"></i></div>
+                    <h3 data-i18n="process_input_title">Entrada</h3>
+                    <p data-i18n="process_input_desc">Análisis inicial y diagnóstico del negocio</p>
+                    <ul class="process-list">
+                        <li data-i18n="input_item1">Reuniones de descubrimiento</li>
+                        <li data-i18n="input_item2">Análisis de requerimientos</li>
+                        <li data-i18n="input_item3">Evaluación de infraestructura</li>
+                        <li data-i18n="input_item4">Definición de objetivos KPI</li>
+                    </ul>
+                </div>
+                <div class="process-card fade-in">
+                    <div class="process-number">2</div>
+                    <div class="process-icon"><i class="fas fa-cogs"></i></div>
+                    <h3 data-i18n="process_process_title">Proceso</h3>
+                    <p data-i18n="process_process_desc">Desarrollo e implementación de soluciones</p>
+                    <ul class="process-list">
+                        <li data-i18n="process_item1">Diseño de arquitectura</li>
+                        <li data-i18n="process_item2">Desarrollo ágil</li>
+                        <li data-i18n="process_item3">Implementación de IA</li>
+                        <li data-i18n="process_item4">Integración de sistemas</li>
+                    </ul>
+                </div>
+                <div class="process-card fade-in">
+                    <div class="process-number">3</div>
+                    <div class="process-icon"><i class="fas fa-rocket"></i></div>
+                    <h3 data-i18n="process_output_title">Salida</h3>
+                    <p data-i18n="process_output_desc">Entrega y puesta en producción</p>
+                    <ul class="process-list">
+                        <li data-i18n="output_item1">Testing y QA</li>
+                        <li data-i18n="output_item2">Deploy en producción</li>
+                        <li data-i18n="output_item3">Capacitación de usuarios</li>
+                        <li data-i18n="output_item4">Documentación técnica</li>
+                    </ul>
+                </div>
+                <div class="process-card fade-in">
+                    <div class="process-number">4</div>
+                    <div class="process-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3 data-i18n="process_feedback_title">Feedback</h3>
+                    <p data-i18n="process_feedback_desc">Mejora continua y optimización</p>
+                    <ul class="process-list">
+                        <li data-i18n="feedback_item1">Monitoreo de métricas</li>
+                        <li data-i18n="feedback_item2">Soporte post-implementación</li>
+                        <li data-i18n="feedback_item3">Optimización continua</li>
+                        <li data-i18n="feedback_item4">Actualizaciones y mejoras</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="business-solutions">
+                <h3 class="section-title fade-in" data-i18n="solutions_title" style="margin-top: 4rem;">Soluciones por Tipo de Negocio</h3>
+                <p class="section-subtitle fade-in" data-i18n="solutions_subtitle">Adaptadas a tus necesidades específicas</p>
+                <div class="solutions-grid">
+                    <div class="solution-card fade-in">
+                        <div class="solution-header"><i class="fas fa-shopping-cart"></i><h3 data-i18n="biz_retail">Retail & E-commerce</h3></div>
+                        <div class="solution-body">
+                            <div class="solution-flow">
+                                <div class="flow-item"><div class="flow-icon">1</div><div class="flow-content"><h4 data-i18n="retail_input">Entrada: Datos de ventas, inventario, clientes</h4><p data-i18n="retail_input_desc">Análisis de comportamiento de compra</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">2</div><div class="flow-content"><h4 data-i18n="retail_process">Proceso: IA predictiva, automatización</h4><p data-i18n="retail_process_desc">Machine learning para predicción de demanda</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">3</div><div class="flow-content"><h4 data-i18n="retail_output">Salida: Dashboard, alertas, reportes</h4><p data-i18n="retail_output_desc">Optimización de inventario en tiempo real</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">4</div><div class="flow-content"><h4 data-i18n="retail_feedback">Feedback: ROI, satisfacción cliente</h4><p data-i18n="retail_feedback_desc">Ajuste de modelos predictivos</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solution-card fade-in">
+                        <div class="solution-header"><i class="fas fa-university"></i><h3 data-i18n="biz_finance">Finanzas & Banca</h3></div>
+                        <div class="solution-body">
+                            <div class="solution-flow">
+                                <div class="flow-item"><div class="flow-icon">1</div><div class="flow-content"><h4 data-i18n="finance_input">Entrada: Transacciones, riesgos, compliance</h4><p data-i18n="finance_input_desc">Datos financieros y regulatorios</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">2</div><div class="flow-content"><h4 data-i18n="finance_process">Proceso: Detección de fraude, scoring</h4><p data-i18n="finance_process_desc">Algoritmos de detección de anomalías</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">3</div><div class="flow-content"><h4 data-i18n="finance_output">Salida: Alertas, aprobaciones, reportes</h4><p data-i18n="finance_output_desc">Automatización de procesos crediticios</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">4</div><div class="flow-content"><h4 data-i18n="finance_feedback">Feedback: Precisión, reducción de pérdidas</h4><p data-i18n="finance_feedback_desc">Refinamiento de modelos de riesgo</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solution-card fade-in">
+                        <div class="solution-header"><i class="fas fa-industry"></i><h3 data-i18n="biz_manufacturing">Manufactura</h3></div>
+                        <div class="solution-body">
+                            <div class="solution-flow">
+                                <div class="flow-item"><div class="flow-icon">1</div><div class="flow-content"><h4 data-i18n="manufacturing_input">Entrada: Sensores IoT, producción, calidad</h4><p data-i18n="manufacturing_input_desc">Datos de línea de producción</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">2</div><div class="flow-content"><h4 data-i18n="manufacturing_process">Proceso: Mantenimiento predictivo, optimización</h4><p data-i18n="manufacturing_process_desc">Análisis de eficiencia operativa</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">3</div><div class="flow-content"><h4 data-i18n="manufacturing_output">Salida: Alertas de mantenimiento, KPIs</h4><p data-i18n="manufacturing_output_desc">Reducción de downtime</p></div></div>
+                                <div class="flow-item"><div class="flow-icon">4</div><div class="flow-content"><h4 data-i18n="manufacturing_feedback">Feedback: Eficiencia, calidad, costos</h4><p data-i18n="manufacturing_feedback_desc">Mejora continua de procesos</p></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title fade-in" data-i18n="about_title">Quiénes Somos</h2>
+            <p class="section-subtitle fade-in" data-i18n="about_subtitle">Corporación SYSITI</p>
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Equipo SYSITI">
+                </div>
+                <div class="about-content fade-in">
+                    <h3 data-i18n="about_heading">Soluciones Tecnológicas que Transforman</h3>
+                    <p data-i18n="about_p1">Somos una consultora líder en implementación de tecnologías disruptivas. Nos especializamos en crear soluciones a la medida que se adaptan a diferentes modelos de negocio, agregando valor tangible y measurable.</p>
+                    <p data-i18n="about_p2">Nuestro equipo de expertos combina conocimiento técnico profundo con comprensión del negocio para entregar proyectos que superan expectativas.</p>
+                    <div class="stats">
+                        <div class="stat-item"><span class="stat-number">50+</span><span class="stat-label" data-i18n="stat_projects">Proyectos Exitosos</span></div>
+                        <div class="stat-item"><span class="stat-number">20+</span><span class="stat-label" data-i18n="stat_experts">Uso de IA</span></div>
+                        <div class="stat-item"><span class="stat-number">80%+</span><span class="stat-label" data-i18n="stat_satisfaction">Automatización de Procesos</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title fade-in" data-i18n="services_title">Nuestros Servicios</h2>
+            <p class="section-subtitle fade-in" data-i18n="services_subtitle">Tecnología de Vanguardia</p>
+            <div class="services-grid">
+                <div class="service-card fade-in"><div class="service-icon"><i class="fas fa-brain"></i></div><h3 data-i18n="service_ai">Inteligencia Artificial</h3><p data-i18n="service_ai_desc">Implementación de modelos de machine learning, deep learning y procesamiento de lenguaje natural para automatizar decisiones y predecir tendencias.</p></div>
+                <div class="service-card fade-in"><div class="service-icon"><i class="fas fa-robot"></i></div><h3 data-i18n="service_agents">Agentes Inteligentes</h3><p data-i18n="service_agents_desc">Desarrollo de agentes autónomos que interactúan con sistemas, realizan tareas complejas y mejoran la productividad operativa.</p></div>
+                <div class="service-card fade-in"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3 data-i18n="service_bi">Business Intelligence</h3><p data-i18n="service_bi_desc">Análisis de datos avanzado, dashboards interactivos y reportes ejecutivos que transforman datos en insights accionables.</p></div>
+                <div class="service-card fade-in"><div class="service-icon"><i class="fas fa-mobile-alt"></i></div><h3 data-i18n="service_apps">Aplicaciones a Medida</h3><p data-i18n="service_apps_desc">Desarrollo de software personalizado, aplicaciones web y móviles diseñadas específicamente para tus necesidades operativas.</p></div>
+                <div class="service-card fade-in"><div class="service-icon"><i class="fas fa-comments"></i></div><h3 data-i18n="service_bots">Bots & Chatbots</h3><p data-i18n="service_bots_desc">Automatización de atención al cliente y procesos internos mediante bots inteligentes disponibles 24/7.</p></div>
+                <div class="service-card fade-in"><div class="service-icon"><i class="fas fa-cogs"></i></div><h3 data-i18n="service_automation">Automatización de Procesos</h3><p data-i18n="service_automation_desc">RPA y automatización inteligente que elimina tareas repetitivas, reduce errores y libera talento humano para actividades de valor.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title fade-in" data-i18n="projects_title">Proyectos Destacados</h2>
+            <p class="section-subtitle fade-in" data-i18n="projects_subtitle">Casos de Éxito</p>
+            <div class="projects-grid">
+                <div class="project-card fade-in"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" alt="Proyecto 1"><div class="project-overlay"><h3 data-i18n="project1_title">Sistema Predictivo de Ventas</h3><p data-i18n="project1_desc">IA que incrementó las ventas en 35% mediante predicción de demanda</p></div></div>
+                <div class="project-card fade-in"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="Proyecto 2"><div class="project-overlay"><h3 data-i18n="project2_title">Automatización Bancaria</h3><p data-i18n="project2_desc">Reducción del 80% en tiempo de procesamiento de documentos</p></div></div>
+                <div class="project-card fade-in"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop" alt="Proyecto 3"><div class="project-overlay"><h3 data-i18n="project3_title">Agente de Atención al Cliente</h3><p data-i18n="project3_desc">Chatbot inteligente que atiende 10,000 consultas diarias</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <h2 class="section-title fade-in" data-i18n="blog_title">Blog & Noticias</h2>
+            <p class="section-subtitle fade-in" data-i18n="blog_subtitle">Últimas Tendencias</p>
+            <div class="blog-grid">
+                <article class="blog-card fade-in"><div class="blog-image"><i class="fas fa-robot"></i></div><div class="blog-content"><div class="blog-date" data-i18n="blog1_date">Mayo 2026</div><h3 data-i18n="blog1_title">El Futuro de los Agentes de IA en Empresas</h3><p data-i18n="blog1_desc">Descubre cómo los agentes autónomos están revolucionando la productividad empresarial...</p><a href="#" class="read-more" data-i18n="read_more">Leer más <i class="fas fa-arrow-right"></i></a></div></article>
+                <article class="blog-card fade-in"><div class="blog-image"><i class="fas fa-database"></i></div><div class="blog-content"><div class="blog-date" data-i18n="blog2_date">Abril 2026</div><h3 data-i18n="blog2_title">Big Data y Toma de Decisiones</h3><p data-i18n="blog2_desc">Cómo transformar grandes volúmenes de datos en ventajas competitivas...</p><a href="#" class="read-more" data-i18n="read_more">Leer más <i class="fas fa-arrow-right"></i></a></div></article>
+                <article class="blog-card fade-in"><div class="blog-image"><i class="fas fa-shield-alt"></i></div><div class="blog-content"><div class="blog-date" data-i18n="blog3_date">Marzo 2026</div><h3 data-i18n="blog3_title">Seguridad en Implementaciones de IA</h3><p data-i18n="blog3_desc">Mejores prácticas para proteger tus sistemas inteligentes...</p><a href="#" class="read-more" data-i18n="read_more">Leer más <i class="fas fa-arrow-right"></i></a></div></article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title fade-in" data-i18n="portfolio_title">Portfolio</h2>
+            <p class="section-subtitle fade-in" data-i18n="portfolio_subtitle">Nuestro Trabajo</p>
+            <div class="projects-grid">
+                <div class="project-card fade-in"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop" alt="Portfolio 1"><div class="project-overlay"><h3 data-i18n="portfolio1_title">Dashboard Analytics</h3><p data-i18n="portfolio1_desc">Visualización de datos en tiempo real</p></div></div>
+                <div class="project-card fade-in"><img src="https://images.unsplash.com/photo-1531498860502-7c67cf02f657?w=400&h=300&fit=crop" alt="Portfolio 2"><div class="project-overlay"><h3 data-i18n="portfolio2_title">App de Gestión</h3><p data-i18n="portfolio2_desc">Plataforma integral de gestión empresarial</p></div></div>
+                <div class="project-card fade-in"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop" alt="Portfolio 3"><div class="project-overlay"><h3 data-i18n="portfolio3_title">Sistema ERP Inteligente</h3><p data-i18n="portfolio3_desc">Automatización de procesos empresariales</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in" data-i18n="contact_title">Contacto</h2>
+            <p class="section-subtitle fade-in" data-i18n="contact_subtitle">Inicia tu Transformación Digital</p>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3 data-i18n="contact_heading">Hablemos de tu Proyecto</h3>
+                    <p data-i18n="contact_desc">Estamos listos para llevar tu negocio al siguiente nivel. Contáctanos y descubre cómo podemos ayudarte.</p>
+                    <div class="contact-details">
+                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><div><strong data-i18n="location">Ubicación</strong><p>Av. Tecnología 123, Ciudad Innovación</p></div></div>
+                        <div class="contact-item"><i class="fas fa-phone"></i><div><strong data-i18n="phone">Teléfono</strong><p>+1 234 567 890</p></div></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><div><strong data-i18n="email">Email</strong><p>contacto@sysiti.com</p></div></div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in">
+                    <form id="contactForm">
+                        <div class="form-group"><label for="name" data-i18n="form_name">Nombre</label><input type="text" id="name" name="name" required></div>
+                        <div class="form-group"><label for="email" data-i18n="form_email">Email</label><input type="email" id="email" name="email" required></div>
+                        <div class="form-group"><label for="company" data-i18n="form_company">Empresa</label><input type="text" id="company" name="company"></div>
+                        <div class="form-group"><label for="message" data-i18n="form_message">Mensaje</label><textarea id="message" name="message" required></textarea></div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;" data-i18n="form_submit">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <radialGradient id="sphereBgF" cx="30%" cy="25%" r="70%"><stop offset="0%" stop-color="#1e4d8c"/><stop offset="40%" stop-color="#0f2d5e"/><stop offset="75%" stop-color="#0a1f44"/><stop offset="100%" stop-color="#061530"/></radialGradient>
+                            <radialGradient id="sphereHighlightF" cx="30%" cy="15%" r="55%"><stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="50%" stop-color="rgba(255,255,255,0.08)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient>
+                            <linearGradient id="silverArcF" x1="0%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#d4d4d4"/><stop offset="100%" stop-color="#b8b8b8"/></linearGradient>
+                            <linearGradient id="greenArcF" x1="30%" y1="0%" x2="70%" y2="100%"><stop offset="0%" stop-color="#8cc63f"/><stop offset="100%" stop-color="#5da82e"/></linearGradient>
+                            <clipPath id="globeClipF"><circle cx="50" cy="50" r="40"/></clipPath>
+                        </defs>
+                        <ellipse cx="50" cy="94" rx="35" ry="4" fill="rgba(0,0,0,0.25)"/>
+                        <circle cx="50" cy="50" r="40" fill="url(#sphereBgF)"/>
+                        <g clip-path="url(#globeClipF)">
+                            <g fill="#5a9ec7" opacity="0.7">
+                                <circle cx="14" cy="18" r="1.5"/><circle cx="16" cy="16" r="1.5"/><circle cx="18" cy="15" r="1.5"/><circle cx="12" cy="22" r="1.5"/><circle cx="15" cy="20" r="1.5"/><circle cx="18" cy="19" r="1.5"/><circle cx="21" cy="18" r="1.5"/><circle cx="24" cy="17" r="1.5"/><circle cx="13" cy="24" r="1.5"/><circle cx="16" cy="22" r="1.5"/><circle cx="19" cy="21" r="1.5"/><circle cx="22" cy="20" r="1.5"/><circle cx="25" cy="19" r="1.5"/><circle cx="14" cy="26" r="1.5"/><circle cx="17" cy="24" r="1.5"/><circle cx="20" cy="23" r="1.5"/><circle cx="23" cy="22" r="1.5"/><circle cx="26" cy="21" r="1.5"/><circle cx="15" cy="28" r="1.5"/><circle cx="18" cy="26" r="1.5"/><circle cx="21" cy="25" r="1.5"/><circle cx="24" cy="24" r="1.5"/><circle cx="27" cy="23" r="1.5"/><circle cx="30" cy="22" r="1.5"/><circle cx="16" cy="30" r="1.5"/><circle cx="19" cy="28" r="1.5"/><circle cx="22" cy="27" r="1.5"/><circle cx="25" cy="26" r="1.5"/><circle cx="28" cy="25" r="1.5"/><circle cx="31" cy="24" r="1.5"/><circle cx="17" cy="32" r="1.5"/><circle cx="20" cy="30" r="1.5"/><circle cx="23" cy="29" r="1.5"/><circle cx="26" cy="28" r="1.5"/><circle cx="29" cy="27" r="1.5"/><circle cx="32" cy="26" r="1.5"/><circle cx="18" cy="34" r="1.5"/><circle cx="21" cy="32" r="1.5"/><circle cx="24" cy="31" r="1.5"/><circle cx="27" cy="30" r="1.5"/><circle cx="30" cy="29" r="1.5"/><circle cx="33" cy="28" r="1.5"/><circle cx="22" cy="34" r="1.5"/><circle cx="25" cy="33" r="1.5"/><circle cx="28" cy="32" r="1.5"/><circle cx="31" cy="31" r="1.5"/><circle cx="34" cy="30" r="1.5"/><circle cx="26" cy="34" r="1.5"/><circle cx="29" cy="34" r="1.5"/><circle cx="32" cy="33" r="1.5"/><circle cx="35" cy="32" r="1.5"/><circle cx="24" cy="37" r="1.5"/><circle cx="26" cy="38" r="1.5"/><circle cx="28" cy="39" r="1.5"/>
+                            </g>
+                            <g fill="#5a9ec7" opacity="0.7"><circle cx="30" cy="40" r="1.5"/><circle cx="33" cy="39" r="1.5"/><circle cx="36" cy="38" r="1.5"/><circle cx="31" cy="42" r="1.5"/><circle cx="34" cy="41" r="1.5"/><circle cx="37" cy="40" r="1.5"/><circle cx="40" cy="39" r="1.5"/><circle cx="32" cy="44" r="1.5"/><circle cx="35" cy="43" r="1.5"/><circle cx="38" cy="42" r="1.5"/><circle cx="41" cy="41" r="1.5"/><circle cx="33" cy="46" r="1.5"/><circle cx="36" cy="45" r="1.5"/><circle cx="39" cy="44" r="1.5"/><circle cx="42" cy="43" r="1.5"/><circle cx="34" cy="48" r="1.5"/><circle cx="37" cy="47" r="1.5"/><circle cx="40" cy="46" r="1.5"/><circle cx="43" cy="45" r="1.5"/><circle cx="35" cy="50" r="1.5"/><circle cx="38" cy="49" r="1.5"/><circle cx="41" cy="48" r="1.5"/><circle cx="44" cy="47" r="1.5"/><circle cx="36" cy="52" r="1.5"/><circle cx="39" cy="51" r="1.5"/><circle cx="42" cy="50" r="1.5"/><circle cx="45" cy="49" r="1.5"/><circle cx="37" cy="54" r="1.5"/><circle cx="40" cy="53" r="1.5"/><circle cx="43" cy="52" r="1.5"/><circle cx="46" cy="51" r="1.5"/><circle cx="38" cy="56" r="1.5"/><circle cx="41" cy="55" r="1.5"/><circle cx="44" cy="54" r="1.5"/><circle cx="39" cy="58" r="1.5"/><circle cx="42" cy="57" r="1.5"/><circle cx="45" cy="56" r="1.5"/><circle cx="40" cy="60" r="1.5"/><circle cx="43" cy="59" r="1.5"/><circle cx="41" cy="62" r="1.5"/><circle cx="44" cy="61" r="1.5"/></g>
+                            <g fill="#4a8db7" opacity="0.5"><circle cx="62" cy="16" r="1.5"/><circle cx="65" cy="15" r="1.5"/><circle cx="68" cy="14" r="1.5"/><circle cx="63" cy="18" r="1.5"/><circle cx="66" cy="17" r="1.5"/><circle cx="69" cy="16" r="1.5"/><circle cx="64" cy="20" r="1.5"/><circle cx="67" cy="19" r="1.5"/><circle cx="70" cy="18" r="1.5"/><circle cx="65" cy="22" r="1.5"/><circle cx="68" cy="21" r="1.5"/><circle cx="71" cy="20" r="1.5"/><circle cx="66" cy="24" r="1.5"/><circle cx="69" cy="23" r="1.5"/></g>
+                            <g fill="#4a8db7" opacity="0.5"><circle cx="68" cy="28" r="1.5"/><circle cx="71" cy="27" r="1.5"/><circle cx="69" cy="30" r="1.5"/><circle cx="72" cy="29" r="1.5"/><circle cx="70" cy="32" r="1.5"/><circle cx="73" cy="31" r="1.5"/><circle cx="71" cy="34" r="1.5"/><circle cx="74" cy="33" r="1.5"/><circle cx="72" cy="36" r="1.5"/><circle cx="75" cy="35" r="1.5"/><circle cx="73" cy="38" r="1.5"/><circle cx="76" cy="37" r="1.5"/><circle cx="74" cy="40" r="1.5"/><circle cx="77" cy="39" r="1.5"/><circle cx="75" cy="42" r="1.5"/><circle cx="78" cy="41" r="1.5"/><circle cx="76" cy="44" r="1.5"/><circle cx="79" cy="43" r="1.5"/><circle cx="77" cy="46" r="1.5"/><circle cx="80" cy="45" r="1.5"/><circle cx="78" cy="48" r="1.5"/><circle cx="81" cy="47" r="1.5"/><circle cx="79" cy="50" r="1.5"/><circle cx="82" cy="49" r="1.5"/><circle cx="80" cy="52" r="1.5"/></g>
+                            <g opacity="0.12" fill="none" stroke="#ffffff" stroke-width="0.5">
+                                <ellipse cx="50" cy="50" rx="40" ry="8"/><ellipse cx="50" cy="50" rx="40" ry="16"/><ellipse cx="50" cy="50" rx="40" ry="24"/><ellipse cx="50" cy="50" rx="40" ry="32"/>
+                                <path d="M50 10 Q45 30 50 50 Q45 70 50 90"/><path d="M50 10 Q55 30 50 50 Q55 70 50 90"/><path d="M50 10 Q60 30 50 50 Q60 70 50 90"/><path d="M50 10 Q40 30 50 50 Q40 70 50 90"/>
+                            </g>
+                        </g>
+                        <circle cx="50" cy="50" r="40" fill="url(#sphereHighlightF)"/>
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="#8892b0" stroke-width="1" opacity="0.3"/>
+                        <path d="M8 38 Q20 18 38 12 Q50 8 60 10 Q55 14 42 18 Q28 24 14 40Z" fill="url(#silverArcF)" opacity="0.92"/>
+                        <path d="M48 10 Q62 6 78 12 Q90 18 96 30 Q92 22 80 17 Q68 12 52 14Z" fill="url(#greenArcF)" opacity="0.92"/>
+                    </svg>
+                </div>
+                <h3 style="color:white;margin-bottom:0.5rem;">Corporación SYSITI</h3>
+                <p style="color:var(--verde-manzana);font-size:0.9rem;" data-i18n="slogan">Soluciones Integrales</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="color:var(--plateado);font-size:0.9rem;">&copy; 2026 Corporación SYSITI. <span data-i18n="rights">Todos los derechos reservados.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            es: { slogan:"Soluciones Integrales", nav_home:"Home", nav_about:"Quiénes Somos", nav_whatwedo:"Qué Hacemos", nav_services:"Servicios", nav_projects:"Proyectos", nav_blog:"Blog", nav_portfolio:"Portfolio", nav_contact:"Contacto", hero_title:"Transformamos tu Negocio con <span class='highlight'>Inteligencia Artificial</span> y Automatización", hero_subtitle:"Soluciones tecnológicas integrales que impulsan la innovación, optimizan procesos y generan valor real para tu empresa. Especialistas en IA, agentes inteligentes y transformación digital.", btn_start:"Iniciar Proyecto", btn_services:"Conocer Servicios", whatwedo_title:"Qué Hacemos", whatwedo_subtitle:"Proceso de Soluciones Integrales", process_input_title:"Entrada", process_input_desc:"Análisis inicial y diagnóstico del negocio", input_item1:"Reuniones de descubrimiento", input_item2:"Análisis de requerimientos", input_item3:"Evaluación de infraestructura", input_item4:"Definición de objetivos KPI", process_process_title:"Proceso", process_process_desc:"Desarrollo e implementación de soluciones", process_item1:"Diseño de arquitectura", process_item2:"Desarrollo ágil", process_item3:"Implementación de IA", process_item4:"Integración de sistemas", process_output_title:"Salida", process_output_desc:"Entrega y puesta en producción", output_item1:"Testing y QA", output_item2:"Deploy en producción", output_item3:"Capacitación de usuarios", output_item4:"Documentación técnica", process_feedback_title:"Feedback", process_feedback_desc:"Mejora continua y optimización", feedback_item1:"Monitoreo de métricas", feedback_item2:"Soporte post-implementación", feedback_item3:"Optimización continua", feedback_item4:"Actualizaciones y mejoras", solutions_title:"Soluciones por Tipo de Negocio", solutions_subtitle:"Adaptadas a tus necesidades específicas", biz_retail:"Retail & E-commerce", retail_input:"Entrada: Datos de ventas, inventario, clientes", retail_input_desc:"Análisis de comportamiento de compra", retail_process:"Proceso: IA predictiva, automatización", retail_process_desc:"Machine learning para predicción de demanda", retail_output:"Salida: Dashboard, alertas, reportes", retail_output_desc:"Optimización de inventario en tiempo real", retail_feedback:"Feedback: ROI, satisfacción cliente", retail_feedback_desc:"Ajuste de modelos predictivos", biz_finance:"Finanzas & Banca", finance_input:"Entrada: Transacciones, riesgos, compliance", finance_input_desc:"Datos financieros y regulatorios", finance_process:"Proceso: Detección de fraude, scoring", finance_process_desc:"Algoritmos de detección de anomalías", finance_output:"Salida: Alertas, aprobaciones, reportes", finance_output_desc:"Automatización de procesos crediticios", finance_feedback:"Feedback: Precisión, reducción de pérdidas", finance_feedback_desc:"Refinamiento de modelos de riesgo", biz_manufacturing:"Manufactura", manufacturing_input:"Entrada: Sensores IoT, producción, calidad", manufacturing_input_desc:"Datos de línea de producción", manufacturing_process:"Proceso: Mantenimiento predictivo, optimización", manufacturing_process_desc:"Análisis de eficiencia operativa", manufacturing_output:"Salida: Alertas de mantenimiento, KPIs", manufacturing_output_desc:"Reducción de downtime", manufacturing_feedback:"Feedback: Eficiencia, calidad, costos", manufacturing_feedback_desc:"Mejora continua de procesos", about_title:"Quiénes Somos", about_subtitle:"Corporación SYSITI", about_heading:"Soluciones Tecnológicas que Transforman", about_p1:"Somos una consultora líder en implementación de tecnologías disruptivas. Nos especializamos en crear soluciones a la medida que se adaptan a diferentes modelos de negocio, agregando valor tangible y measurable.", about_p2:"Nuestro equipo de expertos combina conocimiento técnico profundo con comprensión del negocio para entregar proyectos que superan expectativas.", stat_projects:"Proyectos Exitosos", stat_experts:"Expertos en IA", stat_satisfaction:"Clientes Satisfechos", services_title:"Nuestros Servicios", services_subtitle:"Tecnología de Vanguardia", service_ai:"Inteligencia Artificial", service_ai_desc:"Implementación de modelos de machine learning, deep learning y procesamiento de lenguaje natural para automatizar decisiones y predecir tendencias.", service_agents:"Agentes Inteligentes", service_agents_desc:"Desarrollo de agentes autónomos que interactúan con sistemas, realizan tareas complejas y mejoran la productividad operativa.", service_bi:"Business Intelligence", service_bi_desc:"Análisis de datos avanzado, dashboards interactivos y reportes ejecutivos que transforman datos en insights accionables.", service_apps:"Aplicaciones a Medida", service_apps_desc:"Desarrollo de software personalizado, aplicaciones web y móviles diseñadas específicamente para tus necesidades operativas.", service_bots:"Bots & Chatbots", service_bots_desc:"Automatización de atención al cliente y procesos internos mediante bots inteligentes disponibles 24/7.", service_automation:"Automatización de Procesos", service_automation_desc:"RPA y automatización inteligente que elimina tareas repetitivas, reduce errores y libera talento humano para actividades de valor.", projects_title:"Proyectos Destacados", projects_subtitle:"Casos de Éxito", project1_title:"Sistema Predictivo de Ventas", project1_desc:"IA que incrementó las ventas en 35% mediante predicción de demanda", project2_title:"Automatización Bancaria", project2_desc:"Reducción del 80% en tiempo de procesamiento de documentos", project3_title:"Agente de Atención al Cliente", project3_desc:"Chatbot inteligente que atiende 10,000 consultas diarias", blog_title:"Blog & Noticias", blog_subtitle:"Últimas Tendencias", blog1_date:"Mayo 2026", blog1_title:"El Futuro de los Agentes de IA en Empresas", blog1_desc:"Descubre cómo los agentes autónomos están revolucionando la productividad empresarial...", blog2_date:"Abril 2026", blog2_title:"Big Data y Toma de Decisiones", blog2_desc:"Cómo transformar grandes volúmenes de datos en ventajas competitivas...", blog3_date:"Marzo 2026", blog3_title:"Seguridad en Implementaciones de IA", blog3_desc:"Mejores prácticas para proteger tus sistemas inteligentes...", read_more:"Leer más <i class='fas fa-arrow-right'></i>", portfolio_title:"Portfolio", portfolio_subtitle:"Nuestro Trabajo", portfolio1_title:"Dashboard Analytics", portfolio1_desc:"Visualización de datos en tiempo real", portfolio2_title:"App de Gestión", portfolio2_desc:"Plataforma integral de gestión empresarial", portfolio3_title:"Sistema ERP Inteligente", portfolio3_desc:"Automatización de procesos empresariales", contact_title:"Contacto", contact_subtitle:"Inicia tu Transformación Digital", contact_heading:"Hablemos de tu Proyecto", contact_desc:"Estamos listos para llevar tu negocio al siguiente nivel. Contáctanos y descubre cómo podemos ayudarte.", location:"Ubicación", phone:"Teléfono", email:"Email", form_name:"Nombre", form_email:"Email", form_company:"Empresa", form_message:"Mensaje", form_submit:"Enviar Mensaje", rights:"Todos los derechos reservados." },
+            en: { slogan:"Integral Solutions", nav_home:"Home", nav_about:"About Us", nav_whatwedo:"What We Do", nav_services:"Services", nav_projects:"Projects", nav_blog:"Blog", nav_portfolio:"Portfolio", nav_contact:"Contact", hero_title:"Transform Your Business with <span class='highlight'>Artificial Intelligence</span> and Automation", hero_subtitle:"Comprehensive technological solutions that drive innovation, optimize processes and generate real value for your company. Specialists in AI, intelligent agents and digital transformation.", btn_start:"Start Project", btn_services:"View Services", whatwedo_title:"What We Do", whatwedo_subtitle:"Integral Solutions Process", process_input_title:"Input", process_input_desc:"Initial analysis and business diagnosis", input_item1:"Discovery meetings", input_item2:"Requirements analysis", input_item3:"Infrastructure evaluation", input_item4:"KPI objectives definition", process_process_title:"Process", process_process_desc:"Development and implementation of solutions", process_item1:"Architecture design", process_item2:"Agile development", process_item3:"AI implementation", process_item4:"Systems integration", process_output_title:"Output", process_output_desc:"Delivery and production deployment", output_item1:"Testing and QA", output_item2:"Production deployment", output_item3:"User training", output_item4:"Technical documentation", process_feedback_title:"Feedback", process_feedback_desc:"Continuous improvement and optimization", feedback_item1:"Metrics monitoring", feedback_item2:"Post-implementation support", feedback_item3:"Continuous optimization", feedback_item4:"Updates and improvements", solutions_title:"Solutions by Business Type", solutions_subtitle:"Adapted to your specific needs", biz_retail:"Retail & E-commerce", retail_input:"Input: Sales data, inventory, customers", retail_input_desc:"Purchase behavior analysis", retail_process:"Process: Predictive AI, automation", retail_process_desc:"Machine learning for demand forecasting", retail_output:"Output: Dashboard, alerts, reports", retail_output_desc:"Real-time inventory optimization", retail_feedback:"Feedback: ROI, customer satisfaction", retail_feedback_desc:"Predictive models adjustment", biz_finance:"Finance & Banking", finance_input:"Input: Transactions, risks, compliance", finance_input_desc:"Financial and regulatory data", finance_process:"Process: Fraud detection, scoring", finance_process_desc:"Anomaly detection algorithms", finance_output:"Output: Alerts, approvals, reports", finance_output_desc:"Credit processes automation", finance_feedback:"Feedback: Accuracy, loss reduction", finance_feedback_desc:"Risk models refinement", biz_manufacturing:"Manufacturing", manufacturing_input:"Input: IoT sensors, production, quality", manufacturing_input_desc:"Production line data", manufacturing_process:"Process: Predictive maintenance, optimization", manufacturing_process_desc:"Operational efficiency analysis", manufacturing_output:"Output: Maintenance alerts, KPIs", manufacturing_output_desc:"Downtime reduction", manufacturing_feedback:"Feedback: Efficiency, quality, costs", manufacturing_feedback_desc:"Continuous process improvement", about_title:"About Us", about_subtitle:"SYSITI Corporation", about_heading:"Technological Solutions that Transform", about_p1:"We are a leading consultancy in implementing disruptive technologies. We specialize in creating tailored solutions that adapt to different business models, adding tangible and measurable value.", about_p2:"Our team of experts combines deep technical knowledge with business understanding to deliver projects that exceed expectations.", stat_projects:"Successful Projects", stat_experts:"AI Experts", stat_satisfaction:"Satisfied Clients", services_title:"Our Services", services_subtitle:"Cutting-edge Technology", service_ai:"Artificial Intelligence", service_ai_desc:"Implementation of machine learning, deep learning and natural language processing models to automate decisions and predict trends.", service_agents:"Intelligent Agents", service_agents_desc:"Development of autonomous agents that interact with systems, perform complex tasks and improve operational productivity.", service_bi:"Business Intelligence", service_bi_desc:"Advanced data analysis, interactive dashboards and executive reports that transform data into actionable insights.", service_apps:"Custom Applications", service_apps_desc:"Development of personalized software, web and mobile applications designed specifically for your operational needs.", service_bots:"Bots & Chatbots", service_bots_desc:"Automation of customer service and internal processes through intelligent bots available 24/7.", service_automation:"Process Automation", service_automation_desc:"RPA and intelligent automation that eliminates repetitive tasks, reduces errors and frees human talent for value activities.", projects_title:"Featured Projects", projects_subtitle:"Success Stories", project1_title:"Predictive Sales System", project1_desc:"AI that increased sales by 35% through demand forecasting", project2_title:"Banking Automation", project2_desc:"80% reduction in document processing time", project3_title:"Customer Service Agent", project3_desc:"Intelligent chatbot that handles 10,000 daily inquiries", blog_title:"Blog & News", blog_subtitle:"Latest Trends", blog1_date:"May 2026", blog1_title:"The Future of AI Agents in Business", blog1_desc:"Discover how autonomous agents are revolutionizing business productivity...", blog2_date:"April 2026", blog2_title:"Big Data and Decision Making", blog2_desc:"How to transform large volumes of data into competitive advantages...", blog3_date:"March 2026", blog3_title:"Security in AI Implementations", blog3_desc:"Best practices to protect your intelligent systems...", read_more:"Read more <i class='fas fa-arrow-right'></i>", portfolio_title:"Portfolio", portfolio_subtitle:"Our Work", portfolio1_title:"Analytics Dashboard", portfolio1_desc:"Real-time data visualization", portfolio2_title:"Management App", portfolio2_desc:"Comprehensive business management platform", portfolio3_title:"Intelligent ERP System", portfolio3_desc:"Business processes automation", contact_title:"Contact", contact_subtitle:"Start Your Digital Transformation", contact_heading:"Let's Talk About Your Project", contact_desc:"We are ready to take your business to the next level. Contact us and discover how we can help you.", location:"Location", phone:"Phone", email:"Email", form_name:"Name", form_email:"Email", form_company:"Company", form_message:"Message", form_submit:"Send Message", rights:"All rights reserved." }
+        };
+
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentLangSpan = document.getElementById('currentLang');
+        let currentLang = 'es';
+        langBtn.addEventListener('click', (e) => { e.stopPropagation(); langDropdown.classList.toggle('active'); });
+        document.querySelectorAll('.lang-option').forEach(option => option.addEventListener('click', () => {
+            currentLang = option.getAttribute('data-lang');
+            currentLangSpan.textContent = currentLang.toUpperCase();
+            langDropdown.classList.remove('active');
+            updateLanguage(currentLang);
+        }));
+        document.addEventListener('click', (e) => { if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) langDropdown.classList.remove('active'); });
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+            localStorage.setItem('preferredLang', lang);
+            document.documentElement.lang = lang;
+        }
+
+        const savedLang = localStorage.getItem('preferredLang');
+        if (savedLang && translations[savedLang]) { currentLang = savedLang; currentLangSpan.textContent = savedLang.toUpperCase(); updateLanguage(savedLang); }
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', function(e) {
+            e.preventDefault(); const t = document.querySelector(this.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }));
+
+        const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); const btn = this.querySelector('button[type="submit"]');
+            const orig = btn.textContent; btn.textContent = currentLang === 'es' ? 'Enviando...' : 'Sending...'; btn.disabled = true;
+            setTimeout(() => { alert(currentLang === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!'); this.reset(); btn.textContent = orig; btn.disabled = false; }, 1500);
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) { nav.style.background = 'rgba(10,25,47,0.98)'; nav.style.boxShadow = '0 2px 30px rgba(0,0,0,0.5)'; }
+            else { nav.style.background = 'rgba(10,25,47,0.95)'; nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)'; }
+        });
+
+        const animateValue = (obj, start, end, dur) => { let st = null; const step = ts => { if (!st) st = ts; const p = Math.min((ts-st)/dur,1); obj.innerHTML = Math.floor(p*(end-start)+start)+(obj.textContent.includes('+')?'+':obj.textContent.includes('%')?'%':''); if(p<1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+        const statsObs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting&&!e.target.classList.contains('animated')){ animateValue(e.target.querySelector('.stat-number'),0,parseInt(e.target.querySelector('.stat-number').textContent),2000); e.target.classList.add('animated'); }}), {threshold:0.5});
+        document.querySelectorAll('.stat-item').forEach(s => statsObs.observe(s));
+    </script>
+</body>
+</html>
